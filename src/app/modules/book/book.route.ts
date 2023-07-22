@@ -6,4 +6,8 @@ router.post(
   '/add-new-book',
   bookController.addNewBook
 );
+router.get(
+  '/list-books',
+  bookController.getBooks
+);
 export default router

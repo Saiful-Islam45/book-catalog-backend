@@ -19,6 +19,20 @@ const addNewBook: RequestHandler = tryCatch(
   }
 );
 
+const getBooks: RequestHandler = tryCatch(
+  async (req: Request, res: Response) => {
+    const result = await bookService.getBooks();
+
+    genericResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'book list successfully fetch!',
+      data: result,
+    });
+  }
+);
+
 export const bookController = {
-  addNewBook
+  addNewBook,
+  getBooks
 };

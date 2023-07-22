@@ -6,6 +6,7 @@ const bookSchema = new mongoose.Schema<IBook, BookModel>(
     title: { type: String, required: true },
     author: { type: String, required: true },
     genre:  { type: String, required: true },
+    publicationYear: {type:Number, required: true},
     reviews:  { type: [String], required: false },
     authorInfo: {
       type: Schema.Types.ObjectId,

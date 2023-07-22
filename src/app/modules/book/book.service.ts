@@ -10,8 +10,16 @@ const addNewBook = async (book: IBook): Promise<IBook | null> => {
   }
   return newBook;
 };
+const getBooks = async (): Promise<IBook[] | null> => {
+  const bookList = await Book.find().sort({ createdAt: -1 }).limit(10).populate('authorInfo');
+  if (!bookList) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to fetch book list');
+  }
+  return bookList;
+};
 
 
 export const bookService = {
-  addNewBook
+  addNewBook,
+  getBooks
 };
