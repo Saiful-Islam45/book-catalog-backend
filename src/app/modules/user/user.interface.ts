@@ -9,4 +9,12 @@ export interface IUser {
   createdAt?: Date;
   updatedAt?: Date;
 }
-export type UserModel = {} & Model<IUser>;
+export type UserModel = {
+  isUserExist(
+    email: string
+  ): Promise<Pick<IUser, '_id' | 'password' | 'email' >>;
+  isPasswordMatched(
+    givenPassword: string,
+    savedPassword: string
+  ): Promise<boolean>;
+} & Model<IUser>;

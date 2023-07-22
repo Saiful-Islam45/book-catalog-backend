@@ -18,6 +18,19 @@ const userSchema = new mongoose.Schema<IUser, UserModel>(
   }
 );
 
+userSchema.statics.isUserExist = async function (
+  email: string
+): Promise<Pick<IUser, '_id' | 'password' | 'email'> | null> {
+  return await User.findOne({ email }, { _id: 1, password: 1, email: 1 });
+};
+
+userSchema.statics.isPasswordMatched = async function (
+  givenPassword: string,
+  savedPassword: string
+): Promise<boolean> {
+  return await bcrypt.compare(givenPassword, savedPassword);
+};
+
 userSchema.pre('save', async function (next) {
   // hashing password
   this.password = await bcrypt.hash(
