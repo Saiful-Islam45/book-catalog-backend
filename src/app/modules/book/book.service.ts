@@ -32,11 +32,11 @@ const getSingleBook = async (id): Promise<IBook | null> => {
 };
 
 const deleteBook = async (id): Promise<null> => {
-  const book = await Book.findOne({ _id: id }).populate('authorInfo');
+  const book = await Book.findOne({ _id: id });
   if (!book) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Book not found');
   }
-  await Book.remove();
+  await book.remove();
   return null;
 };
 
