@@ -61,7 +61,7 @@ const deleteBook: RequestHandler = tryCatch(
 const updateBook: RequestHandler = tryCatch(
   async (req: Request, res: Response) => {
     const id = req.params.id
-    const data=req.body.data
+    const data=req.body
     const result = await bookService.updateBook(id, data);
 
     genericResponse(res, {
