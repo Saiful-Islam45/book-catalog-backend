@@ -6,9 +6,17 @@ export interface IBook {
   author: string;
   genre: string;
   reviews?: string[];
-  authorInfo?: string;
+  authorInfo: string;
   publicationYear?: number;
   updatedAt?: Date;
   createdAt?: Date;
+}
+
+export interface IFilters {
+  title?: string;
+  genre?: string;
+  author?:string;
+  publicationYear?: string;
+  limit?: string;
 }
 export type BookModel = {} & Model<IBook>;

@@ -21,7 +21,7 @@ const addNewBook: RequestHandler = tryCatch(
 
 const getBooks: RequestHandler = tryCatch(
   async (req: Request, res: Response) => {
-    const result = await bookService.getBooks();
+    const result = await bookService.getBooks(req.query);
 
     genericResponse(res, {
       statusCode: httpStatus.OK,

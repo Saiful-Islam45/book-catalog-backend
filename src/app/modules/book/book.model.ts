@@ -8,10 +8,7 @@ const bookSchema = new mongoose.Schema<IBook, BookModel>(
     genre:  { type: String, required: true },
     publicationYear: {type:Number, required: true},
     reviews:  { type: [String], required: false },
-    authorInfo: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    }
+    authorInfo: { type: String, required: true }
   },
   {
     timestamps: true,
