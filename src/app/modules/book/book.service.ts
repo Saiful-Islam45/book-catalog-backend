@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
-import { IBook, IFilters } from './book.interface';
+import { IBook, IFilters, IFiltersMenu } from './book.interface';
 import { Book } from './book.model';
 
 const addNewBook = async (book: IBook): Promise<IBook | null> => {
@@ -10,9 +10,9 @@ const addNewBook = async (book: IBook): Promise<IBook | null> => {
   }
   return newBook;
 };
-const getBooks = async (filters): Promise<IBook[] | null> => {
+const getBooks = async (filters: IFilters): Promise<IBook[] | null> => {
   const { title, genre, author, publicationYear, limit }: IFilters = filters;
-  const query = {};
+  const query:IFiltersMenu = {};
   if (title) {
     query['title'] = { $regex: title, $options: 'i' };
   }
@@ -40,7 +40,7 @@ const getBooks = async (filters): Promise<IBook[] | null> => {
   }
   return bookList;
 };
-const getSingleBook = async (id): Promise<IBook | null> => {
+const getSingleBook = async (id: string): Promise<IBook | null> => {
   const book = await Book.findOne({ _id: id });
   if (!book) {
     throw new ApiError(
@@ -51,7 +51,7 @@ const getSingleBook = async (id): Promise<IBook | null> => {
   return book;
 };
 
-const deleteBook = async (id): Promise<null> => {
+const deleteBook = async (id: string): Promise<null> => {
   const book = await Book.findOne({ _id: id });
   if (!book) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Book not found');

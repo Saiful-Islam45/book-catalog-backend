@@ -19,4 +19,15 @@ export interface IFilters {
   publicationYear?: string;
   limit?: string;
 }
+
+export interface IFilterItem {
+  $regex: string;
+  $options?: string;
+}
+export interface IFiltersMenu {
+  title?: IFilterItem;
+  genre?: IFilterItem;
+  author?:IFilterItem;
+  publicationYear?: string;
+}
 export type BookModel = {} & Model<IBook>;
